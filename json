@@ -1,31 +1,62 @@
-#include<iostream>
+#include <iostream>
 #include<stdlib.h>
 #include <fstream>
+#include <vector>
 using namespace std;
 
-int main()
-{
-	string napis;
+class adam{
 	
-	ifstream plik1;
-	ofstream plik2;
+	public:
+		
+		string tekst;
+		vector<string> wektor;
+		
+		ifstream plik1;
+	    ofstream plik2;
+			
+		adam();
+	    ~adam();
+			
+		void wczytaj();
+		void wypisz();
+};
+
+adam::adam(){
+    plik1.open("c:\\plik1.txt");
+    plik2.open("c:\\plik2.txt");
+};
+
+void adam::wczytaj(){
 	
-	plik1.open(src);
-	
-	if(plik1.good()) {
+	 if(plik1.good()) {
 		 while(!plik1.eof()){
-	        getline(plik1, napis);
-			push_back(napis);				
+	        getline(plik1, tekst);
+			wektor.push_back(tekst);				
 	    };	
 	 };
-	 
-  cout << "ContentType:application/json;charset=UTF-8" << (char)13 << (char)10
-      << "\n"
-      << "[ \n "
-          << "  "{ \"title\":\"Imie\", \"subtitle\":\"nazwisko\" }, \n"
-          cout<< "]";
-          
-          
+};
 
- return 0;
+void adam::wypisz(){
+	
+	cout<<"Content-Type: application/json;charset=UTF-8;Access-Control-Allow-Origin: *" << (char)13 << (char)10;
+	cout<<endl<<"[";
+	
+	for(int i=0;i<wektor.size();i+=2){
+		cout<<"{\"imie"<<"\":\""<<wektor[i]<<"\",\"subtitle\":\""<<wektor[i+1]<<"\"}";
+		if(i<wektor.size()-2)cout<<",";
+	};
+	
+	cout<<"]";
+};
+
+adam::~adam(){
+    plik1.close();
+    plik2.close();
+}
+
+int main(int argc, char** argv) {
+	adam program;
+	program.wczytaj();
+	program.wypisz();
+	return 0;
 }
