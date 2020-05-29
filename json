@@ -1,0 +1,31 @@
+#include<iostream>
+#include<stdlib.h>
+#include <fstream>
+using namespace std;
+
+int main()
+{
+	string napis;
+	
+	ifstream plik1;
+	ofstream plik2;
+	
+	plik1.open(src);
+	
+	if(plik1.good()) {
+		 while(!plik1.eof()){
+	        getline(plik1, napis);
+			push_back(napis);				
+	    };	
+	 };
+	 
+  cout << "ContentType:application/json;charset=UTF-8" << (char)13 << (char)10
+      << "\n"
+      << "[ \n "
+          << "  "{ \"title\":\"Imie\", \"subtitle\":\"nazwisko\" }, \n"
+          cout<< "]";
+          
+          
+
+ return 0;
+}
